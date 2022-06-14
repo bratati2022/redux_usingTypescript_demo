@@ -1,11 +1,12 @@
 import React, { ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { actions } from "../store/auth-slice";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [password, setPassword] = useState<string | number>("");
   const [email, setEmail] = useState<string>("");
@@ -21,6 +22,7 @@ const SignIn = () => {
 
   const handleSignIn = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    navigate("/addproducts");
     dispatch(
       actions.login({ email: email, password: password, loggedIn: true })
     );
@@ -31,7 +33,7 @@ const SignIn = () => {
       <h1>Signin</h1>
       <span>
         {" "}
-        No collector Chassis account yet?<Link to="/signup">Signup</Link>
+        No account yet?<Link to="/signup">Signup</Link>
       </span>
 
       <input

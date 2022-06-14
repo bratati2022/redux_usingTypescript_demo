@@ -12,6 +12,8 @@ import AddProducts from "./Components/AddProducts";
 function App() {
   const selector = (state: any) => state.UserData.user;
   const user = useSelector(selector);
+  const isUser = localStorage.length ? true : false;
+  console.log(isUser);
   console.log("In App--", user);
   return (
     <div>
@@ -20,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          {user && <Route path="/addproducts" element={<AddProducts />} />}
+          {isUser && <Route path="/addproducts" element={<AddProducts />} />}
         </Routes>
       </BrowserRouter>
       <Footer />

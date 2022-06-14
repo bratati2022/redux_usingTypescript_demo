@@ -15,6 +15,10 @@ export const LoginUser = createAsyncThunk("LoginUser", async (formdata) => {
 // const initialState = {
 //   status: "idle",
 // };
+// type user = {
+//   email: string;
+//   password: number | string;
+// };
 
 export const UserData = createSlice({
   name: "UserData",
@@ -24,6 +28,11 @@ export const UserData = createSlice({
 
   reducers: {
     login: (state, action) => {
+      state.user = action.payload;
+      localStorage.setItem("user", JSON.stringify(state.user));
+    },
+
+    signup: (state, action) => {
       state.user = action.payload;
     },
   },
@@ -35,6 +44,7 @@ export const UserData = createSlice({
       .addCase(LoginUser.fulfilled, (state, action) => {
         state.user = "true";
         if (action.payload.status === 200) {
+          console.log("In extra reducer", action.payload);
           // notification(action.payload.data.message, "success");
         }
       });
